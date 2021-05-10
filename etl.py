@@ -64,7 +64,10 @@ def process_data(subfolder, outdatafile):
     # Create a for loop to create a list of files and collect each filepath
     for root, dirs, files in os.walk(filepath):
 
-    # join the file path and roots with the subdirectories using glob
+        # ignore notebook temp files
+        if ('.ipynb_checkpoints' in root):
+            continue
+        # join the file path and roots with the subdirectories using glob
         file_path_list = glob.glob(os.path.join(root,'*.csv'))
         #print(file_path_list)
 
