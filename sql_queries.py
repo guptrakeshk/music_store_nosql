@@ -12,37 +12,34 @@ user_music_history_drop = "DROP TABLE IF EXISTS udacity.user_music_history;"
 # CREATE TABLES
 
 music_library_create = ("""CREATE TABLE IF NOT EXISTS udacity.music_library 
-                    (artist_name text , song_title text, duration float, session_id int, item_in_session int, 
-                    PRIMARY KEY( session_id, item_in_session, artist_name))""")
+                    (session_id int, item_in_session int, artist_name text , song_title text, duration float,  
+                    PRIMARY KEY(session_id, item_in_session))""")
 
-user_music_library_create = ("""CREATE TABLE IF NOT EXISTS udacity.user_music_library \
-                    (artist_name text, user_id int, session_id int , item_in_session int, song_title text, 
+user_music_library_create = ("""CREATE TABLE IF NOT EXISTS udacity.user_music_library 
+                    (user_id int, session_id int , item_in_session int, artist_name text, song_title text, 
                      first_name text, last_name text,  PRIMARY KEY((user_id, session_id), item_in_session))
                      WITH CLUSTERING ORDER BY (item_in_session DESC)""")
 
-user_music_history_create = ("""CREATE TABLE IF NOT EXISTS udacity.user_music_history \
-                    (song_title text, first_name text, last_name text, artist_name text, user_id int,
-                    PRIMARY KEY (song_title, first_name, last_name ))""")
+user_music_history_create = ("""CREATE TABLE IF NOT EXISTS udacity.user_music_history 
+                    (song_title text, user_id int, first_name text, last_name text, artist_name text,
+                    PRIMARY KEY (song_title, user_id) )""")
 
 # SQL queries to insert records into database tables
 # INSERT RECORDS
 
 
-music_library_insert = ("""INSERT INTO udacity.music_library (artist_name, song_title, duration, session_id, item_in_session)
+music_library_insert = ("""INSERT INTO udacity.music_library (session_id, item_in_session, artist_name, song_title, duration)
                          VALUES (%s, %s, %s, %s, %s )""")
 
-user_music_library_insert = ("""INSERT INTO udacity.user_music_library (artist_name, user_id, session_id, item_in_session,
+user_music_library_insert = ("""INSERT INTO udacity.user_music_library (user_id, session_id, item_in_session, artist_name, 
                          song_title, first_name, last_name) VALUES (%s, %s, %s, %s, %s, %s, %s ) """)
 
 
-user_music_history_insert = ("""INSERT INTO udacity.user_music_history (song_title, first_name, last_name, artist_name, user_id) 
+user_music_history_insert = ("""INSERT INTO udacity.user_music_history (song_title, user_id, first_name, last_name, artist_name) 
                         VALUES (%s, %s, %s, %s, %s ) """)
 
 # SQL qyery to retrive song_id and artist_id from song title, artists name and song length.
 # FIND SONGS
-
-song_select = (""" SELECT song_id, a.artist_id FROM songs s INNER JOIN artists a ON s.artist_id = a.artist_id \
-                    WHERE title = %s AND name = %s AND duration = %s """)
 
 
 # SQL queries list to create tables

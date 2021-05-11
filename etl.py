@@ -137,24 +137,24 @@ def main():
     # Process event log data and generate a single CSV data file to load database tables
     events_out_file = 'event_datafile_new.csv'
     process_data('event_data',events_out_file)
-    
+        
     
     # music library data insertion
     # Create column data dictionary of a data row using index and value data type 
     # that needs insertion into table using insert query 
-    column_dict = {0:'', 9:'', 5:'float', 8:'int', 3:'int'}
+    column_dict = {8:'int', 3:'int', 0:'', 9:'', 5:'float', }
     process_data_load(events_out_file, music_library_insert, column_dict, session)
                           
     # user_music library data insertion
     # Create column data dictionary of a data row using index and value data type 
     # that needs insertion into table using insert query 
-    column_dict = {0:'', 10:'int', 8:'int', 3:'int', 9:'', 1:'', 4:''}
+    column_dict = {10:'int', 8:'int', 3:'int', 0:'', 9:'', 1:'', 4:''}
     process_data_load(events_out_file, user_music_library_insert, column_dict, session)
                           
     # user_music library data insertion
     # Create column data dictionary of a data row using index and value data type 
     # that needs insertion into table using insert query 
-    column_dict = {9:'', 1:'', 4:'',  0:'', 10:'int'}
+    column_dict = {9:'', 10:'int',  1:'', 4:'',  0:''}
     process_data_load(events_out_file, user_music_history_insert, column_dict, session)
 
     session.shutdown()
